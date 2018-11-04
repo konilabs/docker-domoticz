@@ -27,7 +27,7 @@ RUN apt-get remove -y cmake make gcc g++ libssl-dev git zlib1g-dev libudev-dev l
 
 ADD docker-entrypoint.sh /entrypoint.sh
 
-EXPOSE ["8080"]
+EXPOSE 8080
 VOLUME ["/config"]
 ENTRYPOINT ["/entrypoint.sh"]
 CMD [""]
