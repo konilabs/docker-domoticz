@@ -1,6 +1,8 @@
 FROM debian:stretch-slim
 MAINTAINER Nicolas PERRIN "nicolas@perrin.in"
 
+ENV TIMEZONE Europe/Paris
+
 # Installing packages
 RUN apt-get update \
     && apt-get install -y cmake make gcc g++ libssl-dev git libcurl4-gnutls-dev libusb-dev python3-dev zlib1g-dev libudev-dev libboost-all-dev
@@ -25,9 +27,13 @@ RUN apt-get remove -y cmake make gcc g++ libssl-dev git zlib1g-dev libudev-dev l
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Backup script directory
+RUN mkdir /src/scripts-default \
+    && cp -r /src/domoticz/scripts/* /src/scripts-default
+
 ADD docker-entrypoint.sh /entrypoint.sh
 
 EXPOSE 8080
-VOLUME ["/config"]
+VOLUME ["/config", "/src/domoticz/scripts"]
 ENTRYPOINT ["/entrypoint.sh"]
 CMD [""]

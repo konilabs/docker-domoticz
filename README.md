@@ -24,6 +24,11 @@ Container exposes also `config` folder which contains three subfolders :
 
 `add-cfg` contains all user configuration. All files in this folder overwrites default configuration files from Domoticz. To modify a configuration file, copy it from default-cfg to add-cfg folder. Edit the file in add-cfg folder. At next container start, it will be used by Domoticz.
 
+Container exposes `/src/domoticz/scripts`. It allows user to add custom scripts to Domoticz. By default, this volume is populated with Domoticz default content located in /scripts folder.
+
+`TIMEZONE` environment variable should be updated by user to allow correct time display in Domoticz. Expected format is Linux standard "Europe/Paris" for example.
+
+
 Default command line should look like this :
 
-    docker run -ti -p 8080:8080 --name my-domoticz-container -v myvolume:/config konilabs/domoticz
+    docker run -ti -p 8080:8080 --name my-domoticz-container -v myconfigvolume:/config -v myscriptvolume:/src/domoticz/scripts -e TIMEZONE='Europe/Paris' konilabs/domoticz
