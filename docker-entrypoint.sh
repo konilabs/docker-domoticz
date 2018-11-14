@@ -41,6 +41,11 @@ if [ "$(ls -A /config/add-cfg/)" ]; then
     echo "User configuration found in add-cfg, copy it to Domoticz"
 	cp -rf /config/add-cfg/* /src/domoticz/Config
 fi
+
+# Installing Pip packages
+echo "Installing PIP packages"
+pip3 install $PYPACKAGES
+
 echo "Starting Domoticz..."
 # exec /bin/bash
 exec /src/domoticz/domoticz -dbase /config/db-log/domoticz.db -log /config/db-log/domoticz.log -www 8080

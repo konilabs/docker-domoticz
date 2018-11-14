@@ -28,7 +28,8 @@ Container exposes `/src/domoticz/scripts`. It allows user to add custom scripts 
 
 `TIMEZONE` environment variable should be updated by user to allow correct time display in Domoticz. Expected format is Linux standard "Europe/Paris" for example.
 
+`PYPACKAGES` environment variable allow to install aditional Python packages via pip command. Value can be "requests pyinstaller" for example.
 
 Default command line should look like this :
 
-    docker run -ti -p 8080:8080 --name my-domoticz-container -v myconfigvolume:/config -v myscriptvolume:/src/domoticz/scripts -e TIMEZONE='Europe/Paris' konilabs/domoticz
+    docker run -ti -p 8080:8080 --name my-domoticz-container -v myconfigvolume:/config -v myscriptvolume:/src/domoticz/scripts -e TIMEZONE='Europe/Paris' -e PYPACKAGES='requests' konilabs/domoticz

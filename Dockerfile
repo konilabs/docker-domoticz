@@ -2,10 +2,11 @@ FROM debian:stretch-slim
 MAINTAINER Nicolas PERRIN "nicolas@perrin.in"
 
 ENV TIMEZONE Europe/Paris
+ENV PYPACKAGES requests 
 
 # Installing packages
 RUN apt-get update \
-    && apt-get install -y cmake make gcc g++ libssl-dev git libcurl4-gnutls-dev libusb-dev python3-dev zlib1g-dev libudev-dev libboost-all-dev
+    && apt-get install -y cmake make gcc g++ libssl-dev git libcurl4-gnutls-dev libusb-dev python3-dev python3-pip zlib1g-dev libudev-dev libboost-all-dev
 
 # Build openzwave
 RUN mkdir /src \
@@ -20,6 +21,10 @@ RUN cd /src \
     && cd domoticz \
     && cmake -DCMAKE_BUILD_TYPE=Release CMakeLists.txt \
     && make -j 3  
+
+# Upgrading Pip
+# RUN apt-get install python3-pip
+RUN pip3 install --upgrade pip
 
 # Cleanup container
 RUN apt-get remove -y cmake make gcc g++ libssl-dev git zlib1g-dev libudev-dev libboost-all-dev \
