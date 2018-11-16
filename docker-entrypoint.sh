@@ -42,6 +42,9 @@ if [ "$(ls -A /config/add-cfg/)" ]; then
 	cp -rf /config/add-cfg/* /src/domoticz/Config
 fi
 
+# Setting PYTHONPATH to allow pip modules import
+export PYTHONPATH=/usr/local/lib/$(readlink $(which python3))/dist-packages/
+
 # Installing Pip packages
 echo "Installing PIP packages"
 pip3 install $PYPACKAGES
