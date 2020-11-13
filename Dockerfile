@@ -1,5 +1,5 @@
 FROM debian:buster-slim
-MAINTAINER Nicolas PERRIN "nicolas@perrin.in"
+LABEL maintainer="Nicolas PERRIN nicolas@perrin.in"
 ARG DOMOTICZ_VERSION="2020.2"
 
 # Install cmake from backports
